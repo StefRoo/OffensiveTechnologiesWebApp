@@ -3,9 +3,6 @@ require_once("formvalidator.php");
 
 class FGMembersite
 {
-    var $admin_email;
-    var $from_address;
-    
     var $username;
     var $pwd;
     var $database;
