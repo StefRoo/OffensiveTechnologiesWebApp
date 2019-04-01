@@ -1,7 +1,7 @@
 <?PHP
 require_once("formvalidator.php");
 
-class FGMembersite
+class LoginSite
 {
     var $username;
     var $pwd;
@@ -13,7 +13,7 @@ class FGMembersite
     var $error_message;
     
     //-----Initialization -------
-    function FGMembersite()
+    function LoginSite()
     {
         $this->sitename = 'OtWebsite.com';
         $this->rand_key = 'L^aQmzb+)%}Apq;';
