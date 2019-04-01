@@ -3,9 +3,9 @@ require_once("./include/login_config.php");
 
 if(isset($_POST['submitted']))
 {
-   if($fgmembersite->Login())
+   if($loginsite->Login())
    {
-        $fgmembersite->RedirectToURL("logged_in.php");
+        $loginsite->RedirectToURL("logged_in.php");
    }
 }
 
@@ -19,7 +19,7 @@ if(isset($_POST['submitted']))
 		<body>
 		<!-- Form Code Start -->
 			<div id='fg_membersite'>
-				<form id='login' action='<?php echo $fgmembersite->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
+				<form id='login' action='<?php echo $loginsite->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
 					<fieldset >
 						<legend>Login</legend>
 						<input type='hidden' name='submitted' id='submitted' value='1'/>
@@ -32,7 +32,7 @@ if(isset($_POST['submitted']))
 						<div class='container'>
 							<label for='username' >UserName*:</label>
 							<br/>
-							<input type='text' name='username' id='username' value='<?php echo $fgmembersite->SafeDisplay('username') ?>' maxlength="50" />
+							<input type='text' name='username' id='username' value='<?php echo $loginsite->SafeDisplay('username') ?>' maxlength="50" />
 							<br/>
 							<span id='login_username_errorloc' class='error'></span>
 						</div>
