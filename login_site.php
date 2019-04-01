@@ -185,9 +185,7 @@ class FGMembersite
     }
     
  /*
-    Sanitize() function removes any potential threat from the
-    data submitted. Prevents email injections or any other hacker attempts.
-    if $remove_nl is true, newline chracters are removed from the input.
+    Sanitizes input to alleviate potential threats. Not used at the moment.
     */
     function Sanitize($str,$remove_nl=true)
     {
