@@ -1,9 +1,9 @@
 <?PHP
 require_once("./include/login_config.php");
 
-if(!$fgmembersite->CheckLogin())
+if(!$loginsite->CheckLogin())
 {
-    $fgmembersite->RedirectToURL("index.php");
+    $loginsite->RedirectToURL("index.php");
     exit;
 }
 
@@ -15,7 +15,7 @@ if(!$fgmembersite->CheckLogin())
 		</head>
 		<body>
 			<div id='login_content'>
-				Login succesful, <?= $fgmembersite->UserFullName(); ?>!
+				Login succesful, <?= $loginsite->UserFullName(); ?>!
 			</div>
 		</body>
 	</html>
