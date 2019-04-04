@@ -18,7 +18,7 @@ if(isset($_POST['submitted']))
 		</head>
 		<body>
 		<!-- Form Code Start -->
-			<div id='fg_membersite'>
+			<div id='loginsite'>
 				<form id='login' action='<?php echo $loginsite->GetSelfScript(); ?>' method='post' accept-charset='UTF-8'>
 					<fieldset >
 						<legend>Login</legend>
@@ -26,7 +26,7 @@ if(isset($_POST['submitted']))
 						<div class='short_explanation'>* required fields</div>
 						<div>
 							<span class='error'>
-								<?php echo $fgmembersite->GetErrorMessage(); ?>
+								<?php echo $loginsite->GetErrorMessage(); ?>
 							</span>
 						</div>
 						<div class='container'>
