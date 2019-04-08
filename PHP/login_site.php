@@ -15,7 +15,8 @@ class LoginSite
     //-----Initialization -------
     function LoginSite()
     {
-        $this->sitename = 'OtWebsite.com';
+        $this->sitename = '127.0.0.1';
+	$this->port = '6337';
         $this->rand_key = 'L^aQmzb+)%}Apq;';
     }
 	
@@ -107,7 +108,7 @@ class LoginSite
     
     function HandleDBError($err)
     {
-        $this->HandleError($err."\r\n mysqlerror:".mysql_error());
+        $this->HandleError($err."\r\n pg_last_error:".pg_last_error());
     }
     
     function GetLoginSessionVar()
@@ -128,19 +129,18 @@ class LoginSite
         $pwdmd5 = md5($password);
         $qry = "Select name, email from $this->tablename where username='$username' and password='$pwdmd5' and confirmcode='y'";
         
-        $result = mysql_query($qry,$this->connection);
+        $result = pg_query($qry,$this->connection);
         
-        if(!$result || mysql_num_rows($result) <= 0)
+        if(!$result || pg_num_rows($result) <= 0)
         {
             $this->HandleError("Error logging in. The username or password does not match");
             return false;
         }
         
-        $row = mysql_fetch_assoc($result);
+        $row = pg_fetch_assoc($result);
         
         
         $_SESSION['name_of_user']  = $row['name'];
-        $_SESSION['email_of_user'] = $row['email'];
         
         return true;
     }
@@ -148,19 +148,19 @@ class LoginSite
     function DBLogin()
     {
 
-        $this->connection = mysql_connect($this->db_host,$this->username,$this->pwd);
+        $this->connection = pg_connect($this->db_host,$this->username,$this->pwd);
 
         if(!$this->connection)
         {   
             $this->HandleDBError("Database Login failed! Please make sure that the DB login credentials provided are correct");
             return false;
         }
-        if(!mysql_select_db($this->database, $this->connection))
+        if(!pg_select($this->database, $this->connection))
         {
             $this->HandleDBError('Failed to select database: '.$this->database.' Please make sure that the database name provided is correct');
             return false;
         }
-        if(!mysql_query("SET NAMES 'UTF8'",$this->connection))
+        if(!pg_query("SET NAMES 'UTF8'",$this->connection))
         {
             $this->HandleDBError('Error setting utf8 encoding');
             return false;
@@ -170,9 +170,9 @@ class LoginSite
     
     function SanitizeForSQL($str)
     {
-        if( function_exists( "mysql_real_escape_string" ) )
+        if( function_exists( "pg_escape_string" ) )
         {
-              $ret_str = mysql_real_escape_string( $str );
+              $ret_str = pg_escape_string( $str );
         }
         else
         {
